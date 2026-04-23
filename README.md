@@ -1,5 +1,9 @@
 # spring-boot-starter-rate-limit
 
+[![CI](https://github.com/thgrcarvalho/spring-boot-starter-rate-limit/actions/workflows/ci.yml/badge.svg)](https://github.com/thgrcarvalho/spring-boot-starter-rate-limit/actions/workflows/ci.yml)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.thgrcarvalho/spring-boot-starter-rate-limit)](https://central.sonatype.com/artifact/io.github.thgrcarvalho/spring-boot-starter-rate-limit)
+[![codecov](https://codecov.io/gh/thgrcarvalho/spring-boot-starter-rate-limit/branch/main/graph/badge.svg)](https://codecov.io/gh/thgrcarvalho/spring-boot-starter-rate-limit)
+
 A Spring Boot starter that adds token-bucket rate limiting to any controller method with a single annotation.
 
 ```java
