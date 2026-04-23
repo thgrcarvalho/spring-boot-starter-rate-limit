@@ -21,7 +21,7 @@ Clients that exceed the limit receive HTTP 429 Too Many Requests. No code change
 **Gradle:**
 ```groovy
 dependencies {
-    implementation 'io.github.thgrcarvalho:spring-boot-starter-rate-limit:0.1.0'
+    implementation 'io.github.thgrcarvalho:spring-boot-starter-rate-limit:0.2.0'
 }
 ```
 
@@ -30,7 +30,7 @@ dependencies {
 <dependency>
     <groupId>io.github.thgrcarvalho</groupId>
     <artifactId>spring-boot-starter-rate-limit</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
 </dependency>
 ```
 
@@ -55,9 +55,9 @@ The starter auto-configures on any `@SpringBootApplication` with Spring Web on t
 
 A `ConcurrentHashMap` — zero configuration, suitable for single-instance deployments. Uses atomic compare-and-swap for thread safety.
 
-### Custom backends
+### Redis (multi-instance)
 
-Implement `RateLimitStore` and register it as a Spring bean — the autoconfiguration backs off automatically:
+A distributed token-bucket backed by Redis. Uses an atomic Lua script so check-and-decrement is a single Redis operation — no race conditions between pods.
 
 ```java
 @Bean
@@ -65,6 +65,12 @@ RateLimitStore rateLimitStore(RedisConnectionFactory connectionFactory) {
     return new RedisRateLimitStore(connectionFactory);
 }
 ```
+
+The autoconfiguration backs off automatically once you declare a bean of type `RateLimitStore`.
+
+### Custom backends
+
+Implement `RateLimitStore` yourself and register it as a bean — same back-off behaviour applies.
 
 ## Running tests
 
